@@ -1,0 +1,10 @@
+# robots.txt — Compound Interest Calculator
+User-agent: *
+Allow: /
+
+# Block any potential admin/dev files
+Disallow: /serve.ps1
+Disallow: /.claude/
+
+# Sitemap location
+Sitemap: https://yoursite.com/sitemap.xml

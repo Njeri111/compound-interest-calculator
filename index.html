@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Primary SEO ── -->
+  <title>Compound Interest Calculator – See How Your Money Grows Over Time</title>
+  <meta name="description" content="Free compound interest calculator. Enter your principal, monthly contributions, interest rate, and time period to instantly see your investment growth, total interest earned, and a year-by-year breakdown." />
+  <meta name="keywords" content="compound interest calculator, investment calculator, savings growth calculator, interest calculator, compound growth, financial calculator, money growth calculator, savings calculator" />
+  <meta name="author" content="Compound Interest Calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yoursite.com/" />
+
+  <!-- ── Open Graph (Facebook / LinkedIn) ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://yoursite.com/" />
+  <meta property="og:title"       content="Compound Interest Calculator – See How Your Money Grows" />
+  <meta property="og:description" content="Instantly calculate how your savings grow with compound interest. Supports daily, monthly, quarterly, and annual compounding with a full year-by-year breakdown." />
+  <meta property="og:image"       content="https://yoursite.com/og-image.png" />
+  <meta property="og:site_name"   content="Compound Interest Calculator" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- ── Twitter / X Card ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:url"         content="https://yoursite.com/" />
+  <meta name="twitter:title"       content="Compound Interest Calculator – See How Your Money Grows" />
+  <meta name="twitter:description" content="Instantly calculate how your savings grow with compound interest. Supports daily, monthly, quarterly, and annual compounding with a full year-by-year breakdown." />
+  <meta name="twitter:image"       content="https://yoursite.com/og-image.png" />
+
+  <!-- ── Structured Data (JSON-LD) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Compound Interest Calculator",
+    "url": "https://yoursite.com/",
+    "description": "A free compound interest calculator that shows investment growth over time with monthly contributions, multiple compounding frequencies, and a year-by-year breakdown.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Compound interest calculation",
+      "Monthly contribution support",
+      "Multiple compounding frequencies (daily, monthly, quarterly, semi-annual, annual)",
+      "Year-by-year investment breakdown",
+      "Interactive growth chart",
+      "Real-time results"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Compound Interest Calculator"
+    }
+  }
+  </script>
+
+  <!-- ── FAQ Structured Data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is compound interest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. Unlike simple interest, it allows your investment to grow exponentially over time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should interest compound for the best returns?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The more frequently interest compounds, the higher your returns. Daily compounding yields slightly more than monthly, which yields more than annual compounding. However, the difference is often small compared to the impact of a higher interest rate or larger contributions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the compound interest formula?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The compound interest formula is A = P(1 + r/n)^(nt), where A is the final amount, P is the principal, r is the annual interest rate (as a decimal), n is the number of times interest compounds per year, and t is the time in years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I invest monthly to become a millionaire?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monthly amount needed depends on your interest rate and time horizon. For example, investing $500/month at an 8% annual return compounded quarterly for 30 years grows to approximately $745,000. You can use this calculator to find the exact monthly contribution needed for your goal."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ── Favicon & PWA ── -->
+  <link rel="icon"             type="image/svg+xml"  href="/favicon.svg" />
+  <link rel="alternate icon"   type="image/png"      href="/favicon.svg" />
+  <link rel="apple-touch-icon"                       href="/favicon.svg" />
+  <link rel="manifest"                               href="/manifest.json" />
+  <meta name="theme-color"     content="#1B5E45" />
+  <meta name="mobile-web-app-capable"      content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title"  content="CI Calc" />
+
+  <!-- ── Performance hints ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { 50:'#F0F7F3', 100:'#D8EDE3', 300:'#7EC2A6', 500:'#2A8562', 600:'#1B5E45', 700:'#164D38' },
+            gold:   { 300:'#ECC05F', 400:'#E4A830', 500:'#C9922F' },
+            cream:  '#FAF7F2',
+            ink:    '#1C2333',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #FAF7F2;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Layered background */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 10%,  rgba(27,94,69,.07)  0%, transparent 60%),
+        radial-gradient(ellipse 55% 40% at 85% 80%,  rgba(201,146,47,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 55% at 50% 110%, rgba(27,94,69,.05)  0%, transparent 55%);
+    }
+    .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+      opacity: .5;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255,255,254,.92);
+      border: 1px solid rgba(226,221,214,.75);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 1px 2px  rgba(28,35,51,.04),
+        0 4px 12px rgba(28,35,51,.06),
+        0 18px 48px rgba(28,35,51,.08);
+    }
+
+    /* Result hero card */
+    .result-hero {
+      background: #1B5E45;
+      border-radius: 18px;
+      box-shadow:
+        0 2px 4px  rgba(27,94,69,.25),
+        0 10px 28px rgba(27,94,69,.28),
+        0 24px 64px rgba(27,94,69,.18);
+    }
+
+    .stat-tile {
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 12px;
+      transition: background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+    }
+    .stat-tile:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+
+    /* Inputs */
+    .ci-input {
+      width: 100%;
+      padding: .8125rem 1rem;
+      border: 1.5px solid #E2DDD6;
+      border-radius: 10px;
+      background: #FFFFFE;
+      color: #1C2333;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9375rem;
+      font-weight: 500;
+      outline: none;
+      appearance: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+    .ci-input:hover  { border-color: #2A8562; }
+    .ci-input:focus  { border-color: #1B5E45; box-shadow: 0 0 0 3px rgba(27,94,69,.13); }
+
+    /* Sliders */
+    .ci-range {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(to right, #1B5E45 var(--pct,50%), #E2DDD6 var(--pct,50%));
+      outline: none; cursor: pointer;
+      transition: background .1s;
+    }
+    .ci-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #1B5E45;
+      box-shadow: 0 2px 8px rgba(27,94,69,.35);
+      transition: transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .15s ease;
+    }
+    .ci-range::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+      box-shadow: 0 3px 14px rgba(27,94,69,.45);
+    }
+    .ci-range::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%; border: none;
+      background: #1B5E45; box-shadow: 0 2px 8px rgba(27,94,69,.35);
+    }
+
+    /* Frequency pills */
+    .freq-pill {
+      padding: .4375rem .875rem;
+      border-radius: 8px;
+      border: 1.5px solid #E2DDD6;
+      background: transparent;
+      color: #5A6478;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, color .15s ease,
+                  transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .15s ease;
+    }
+    .freq-pill:hover        { border-color: #2A8562; color: #1B5E45; background: rgba(27,94,69,.06); }
+    .freq-pill:active       { transform: scale(.95); }
+    .freq-pill:focus-visible{ outline: 3px solid rgba(27,94,69,.3); outline-offset: 1px; }
+    .freq-pill.on {
+      background: #1B5E45; border-color: #1B5E45; color: #fff;
+      box-shadow: 0 2px 10px rgba(27,94,69,.35);
+    }
+
+    /* Labels */
+    .lbl {
+      font-size: .75rem;
+      font-weight: 500;
+      color: #5A6478;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: .5rem;
+    }
+
+    /* Animated value swap */
+    .anim-val {
+      display: inline-block;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .anim-val.flash { opacity: 0; transform: translateY(5px); }
+
+    /* Table rows */
+    #breakdown-body tr { transition: background .1s ease; }
+    #breakdown-body tr:hover { background: rgba(27,94,69,.05); }
+    #breakdown-body tr:nth-child(even) { background: rgba(27,94,69,.025); }
+    #breakdown-body tr:nth-child(even):hover { background: rgba(27,94,69,.06); }
+
+    /* Canvas */
+    #chart { display: block; width: 100%; }
+
+    /* Page enter */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .55s cubic-bezier(.22,1,.36,1) both; }
+    .fade-up-2 { animation: fadeUp .55s .1s cubic-bezier(.22,1,.36,1) both; }
+    .fade-up-3 { animation: fadeUp .55s .2s cubic-bezier(.22,1,.36,1) both; }
+  </style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<div class="relative z-10 min-h-screen py-10 px-4 md:px-6">
+
+  <!-- Header -->
+  <header class="text-center mb-10 fade-up" role="banner">
+    <div class="inline-flex items-center gap-2 bg-white border border-[#E2DDD6] rounded-full px-4 py-1.5 mb-5 shadow-sm">
+      <span class="w-2 h-2 rounded-full bg-[#2A8562] inline-block" aria-hidden="true"></span>
+      <span class="text-xs font-medium text-[#5A6478] tracking-widest uppercase">Free Financial Tool</span>
+    </div>
+    <h1 class="font-display text-[2.6rem] md:text-[3.5rem] leading-[1.08] text-[#1C2333]"
+        style="letter-spacing:-0.03em;">
+      Compound Interest<br>Calculator
+    </h1>
+    <p class="text-[#5A6478] mt-3 text-base max-w-md mx-auto" style="line-height:1.7;">
+      See exactly how your savings and investments grow over time — with monthly contributions, multiple compounding frequencies, and a full year-by-year breakdown.
+    </p>
+  </header>
+
+  <main class="max-w-5xl mx-auto space-y-5" id="calculator" role="main" aria-label="Compound Interest Calculator">
+
+    <!-- Main row -->
+    <div class="grid md:grid-cols-2 gap-5">
+
+      <!-- ── Inputs ── -->
+      <section class="card p-7 fade-up-2" aria-label="Calculator Inputs">
+        <h2 class="font-display text-xl text-[#1C2333] mb-7" style="letter-spacing:-0.02em;">Your Investment</h2>
+
+        <div class="space-y-6">
+
+          <!-- Principal -->
+          <div>
+            <label class="lbl" for="principal">Initial Investment</label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5A6478] text-sm font-medium select-none" aria-hidden="true">$</span>
+              <input class="ci-input pl-8" id="principal" type="number" value="10000" min="0" step="100"
+                     aria-label="Initial investment amount in dollars" aria-describedby="principal-hint" />
+            </div>
+            <input class="ci-range mt-3" id="principalSlider" type="range" min="1000" max="500000" step="1000" value="10000"
+                   aria-label="Initial investment slider" />
+            <div id="principal-hint" class="flex justify-between text-[10px] text-[#A0AABF] mt-1 font-medium">
+              <span>$1 K</span><span>$500 K</span>
+            </div>
+          </div>
+
+          <!-- Monthly Contribution -->
+          <div>
+            <label class="lbl" for="monthly">Monthly Contribution</label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5A6478] text-sm font-medium select-none" aria-hidden="true">$</span>
+              <input class="ci-input pl-8" id="monthly" type="number" value="500" min="0" step="50"
+                     aria-label="Monthly contribution amount in dollars" aria-describedby="monthly-hint" />
+            </div>
+            <input class="ci-range mt-3" id="monthlySlider" type="range" min="0" max="5000" step="50" value="500"
+                   aria-label="Monthly contribution slider" />
+            <div id="monthly-hint" class="flex justify-between text-[10px] text-[#A0AABF] mt-1 font-medium">
+              <span>$0</span><span>$5 K</span>
+            </div>
+          </div>
+
+          <!-- Rate -->
+          <div>
+            <label class="lbl" for="rate">Annual Interest Rate</label>
+            <div class="relative">
+              <input class="ci-input pr-8" id="rate" type="number" value="8" min="0.1" max="50" step="0.1"
+                     aria-label="Annual interest rate as a percentage" aria-describedby="rate-hint" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#5A6478] text-sm font-medium select-none" aria-hidden="true">%</span>
+            </div>
+            <input class="ci-range mt-3" id="rateSlider" type="range" min="0.1" max="30" step="0.1" value="8"
+                   aria-label="Interest rate slider" />
+            <div id="rate-hint" class="flex justify-between text-[10px] text-[#A0AABF] mt-1 font-medium">
+              <span>0.1%</span><span>30%</span>
+            </div>
+          </div>
+
+          <!-- Years -->
+          <div>
+            <label class="lbl" for="years">Time Period</label>
+            <div class="relative">
+              <input class="ci-input pr-16" id="years" type="number" value="10" min="1" max="50" step="1"
+                     aria-label="Investment time period in years" aria-describedby="years-hint" />
+              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#5A6478] text-sm font-medium select-none" aria-hidden="true">years</span>
+            </div>
+            <input class="ci-range mt-3" id="yearsSlider" type="range" min="1" max="50" step="1" value="10"
+                   aria-label="Time period slider" />
+            <div id="years-hint" class="flex justify-between text-[10px] text-[#A0AABF] mt-1 font-medium">
+              <span>1 yr</span><span>50 yrs</span>
+            </div>
+          </div>
+
+          <!-- Frequency -->
+          <div>
+            <label class="lbl">Compounding Frequency</label>
+            <div class="flex flex-wrap gap-2" id="freqGroup" role="group" aria-label="Select compounding frequency">
+              <button class="freq-pill" data-n="365" aria-pressed="false">Daily</button>
+              <button class="freq-pill" data-n="12"  aria-pressed="false">Monthly</button>
+              <button class="freq-pill on" data-n="4" aria-pressed="true">Quarterly</button>
+              <button class="freq-pill" data-n="2"   aria-pressed="false">Semi-Ann.</button>
+              <button class="freq-pill" data-n="1"   aria-pressed="false">Annually</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Results ── -->
+      <section class="flex flex-col gap-5 fade-up-3" aria-label="Calculation Results" aria-live="polite" aria-atomic="true">
+
+        <!-- Hero card -->
+        <div class="result-hero p-6 text-white flex-none" role="region" aria-label="Final Balance Summary">
+          <div class="flex items-start justify-between mb-5">
+            <div>
+              <p class="text-[#7EC2A6] text-[10px] font-semibold tracking-[.12em] uppercase mb-2">Final Balance</p>
+              <div id="totalAmt" class="font-display text-[2.6rem] leading-none font-bold anim-val"
+                   style="letter-spacing:-0.025em;" aria-label="Final balance">—</div>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-white/10 grid place-items-center flex-none mt-1">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mb-5">
+            <div class="stat-tile p-4">
+              <p class="text-[#7EC2A6] text-[10px] font-semibold tracking-[.1em] uppercase mb-1.5">Total Invested</p>
+              <p id="totalContrib" class="text-white font-semibold text-lg anim-val">—</p>
+            </div>
+            <div class="stat-tile p-4">
+              <p class="text-[#7EC2A6] text-[10px] font-semibold tracking-[.1em] uppercase mb-1.5">Interest Earned</p>
+              <p id="totalInterest" class="font-semibold text-lg anim-val" style="color:#FFD166">—</p>
+            </div>
+          </div>
+
+          <!-- Split bar -->
+          <div>
+            <div class="flex justify-between text-[11px] text-[#7EC2A6] mb-2 font-medium">
+              <span>Principal</span>
+              <span id="intPct">—% interest</span>
+            </div>
+            <div class="flex h-2 rounded-full overflow-hidden gap-0.5">
+              <div id="barP" class="h-full rounded-full transition-all duration-700 ease-out"
+                   style="width:60%;background:rgba(255,255,255,.45)"></div>
+              <div id="barI" class="h-full rounded-full transition-all duration-700 ease-out"
+                   style="width:40%;background:linear-gradient(to right,#FFD166,#E4A830)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight chip -->
+        <div class="card px-5 py-3.5 flex items-center gap-3 flex-none">
+          <div class="w-8 h-8 rounded-full bg-[#F0F7F3] grid place-items-center flex-none">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B5E45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+          </div>
+          <p id="insight" class="text-sm text-[#5A6478]" style="line-height:1.5;">—</p>
+        </div>
+
+        <!-- Chart card -->
+        <div class="card p-5 flex-1">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-display text-base text-[#1C2333]" style="letter-spacing:-.01em;">Growth Over Time</h3>
+            <div class="flex items-center gap-3 text-[11px] text-[#5A6478] font-medium">
+              <span class="flex items-center gap-1.5">
+                <span class="inline-block w-3 h-3 rounded-sm" style="background:#1B5E45;opacity:.7"></span>Invested
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="inline-block w-3 h-3 rounded-sm" style="background:#FFD166"></span>Interest
+              </span>
+            </div>
+          </div>
+          <canvas id="chart" height="200"></canvas>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Breakdown table -->
+    <div class="card p-6 md:p-8 fade-up-3">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="font-display text-xl text-[#1C2333]" style="letter-spacing:-.02em;">Year-by-Year Breakdown</h2>
+        <span id="yrsLabel" class="text-xs font-medium text-[#1B5E45] bg-[#F0F7F3] border border-[#D8EDE3] px-3 py-1.5 rounded-full">10 years</span>
+      </div>
+      <div class="overflow-x-auto -mx-1">
+        <table class="w-full text-sm min-w-[520px]" aria-label="Year-by-year investment growth breakdown">
+          <thead>
+            <tr class="border-b border-[#EAE6E0]">
+              <th scope="col" class="text-left pb-3 text-[#5A6478] font-medium text-[11px] tracking-widest uppercase">Year</th>
+              <th scope="col" class="text-right pb-3 text-[#5A6478] font-medium text-[11px] tracking-widest uppercase">Balance</th>
+              <th scope="col" class="text-right pb-3 text-[#5A6478] font-medium text-[11px] tracking-widest uppercase">Total Invested</th>
+              <th scope="col" class="text-right pb-3 text-[#5A6478] font-medium text-[11px] tracking-widest uppercase">Interest Earned</th>
+              <th scope="col" class="text-right pb-3 text-[#5A6478] font-medium text-[11px] tracking-widest uppercase">Growth</th>
+            </tr>
+          </thead>
+          <tbody id="breakdown-body" class="divide-y divide-[#F2EEE9]"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── FAQ Section (SEO) ── -->
+    <section class="card p-6 md:p-10 fade-up-3" aria-label="Frequently Asked Questions">
+      <h2 class="font-display text-2xl text-[#1C2333] mb-8" style="letter-spacing:-.02em;">
+        Compound Interest — Frequently Asked Questions
+      </h2>
+      <div class="space-y-0 divide-y divide-[#F0EDE8]">
+
+        <details class="group py-5 cursor-pointer" open>
+          <summary class="flex items-center justify-between gap-4 list-none text-[#1C2333] font-semibold text-base select-none focus-visible:outline-2 focus-visible:outline-[#1B5E45] focus-visible:outline-offset-2 rounded-sm">
+            What is compound interest?
+            <span class="flex-none w-6 h-6 rounded-full bg-[#F0F7F3] grid place-items-center text-[#1B5E45] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-[#5A6478] text-sm leading-relaxed max-w-2xl" style="line-height:1.75;">
+            Compound interest is interest calculated on <strong>both your principal and previously earned interest</strong>. Unlike simple interest, which only calculates on the original amount, compound interest causes your money to grow exponentially — the longer you invest, the faster it grows. This is why starting early is so powerful.
+          </p>
+        </details>
+
+        <details class="group py-5 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 list-none text-[#1C2333] font-semibold text-base select-none focus-visible:outline-2 focus-visible:outline-[#1B5E45] focus-visible:outline-offset-2 rounded-sm">
+            What is the compound interest formula?
+            <span class="flex-none w-6 h-6 rounded-full bg-[#F0F7F3] grid place-items-center text-[#1B5E45] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-[#5A6478] text-sm leading-relaxed max-w-2xl" style="line-height:1.75;">
+            The standard formula is <strong>A = P(1 + r/n)<sup>nt</sup></strong>, where A is the final amount, P is the principal, r is the annual interest rate (as a decimal), n is the number of compounding periods per year, and t is time in years. For regular contributions, this calculator simulates each period individually for accuracy.
+          </p>
+        </details>
+
+        <details class="group py-5 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 list-none text-[#1C2333] font-semibold text-base select-none focus-visible:outline-2 focus-visible:outline-[#1B5E45] focus-visible:outline-offset-2 rounded-sm">
+            How often should interest compound for the best returns?
+            <span class="flex-none w-6 h-6 rounded-full bg-[#F0F7F3] grid place-items-center text-[#1B5E45] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-[#5A6478] text-sm leading-relaxed max-w-2xl" style="line-height:1.75;">
+            The more frequently interest compounds, the higher your returns — <strong>daily compounding yields slightly more than monthly or annually</strong>. However, the difference between daily and monthly compounding is often very small. Your interest rate, contribution amount, and time invested have a far greater impact on your final balance than compounding frequency alone.
+          </p>
+        </details>
+
+        <details class="group py-5 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 list-none text-[#1C2333] font-semibold text-base select-none focus-visible:outline-2 focus-visible:outline-[#1B5E45] focus-visible:outline-offset-2 rounded-sm">
+            What is the Rule of 72?
+            <span class="flex-none w-6 h-6 rounded-full bg-[#F0F7F3] grid place-items-center text-[#1B5E45] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-[#5A6478] text-sm leading-relaxed max-w-2xl" style="line-height:1.75;">
+            The Rule of 72 is a quick shortcut: <strong>divide 72 by your annual interest rate</strong> to estimate how many years it takes to double your money. For example, at 8% interest, your investment doubles approximately every 9 years (72 ÷ 8 = 9). Use this calculator to see the exact growth curve for your specific scenario.
+          </p>
+        </details>
+
+        <details class="group py-5 cursor-pointer">
+          <summary class="flex items-center justify-between gap-4 list-none text-[#1C2333] font-semibold text-base select-none focus-visible:outline-2 focus-visible:outline-[#1B5E45] focus-visible:outline-offset-2 rounded-sm">
+            How much do I need to invest monthly to reach $1,000,000?
+            <span class="flex-none w-6 h-6 rounded-full bg-[#F0F7F3] grid place-items-center text-[#1B5E45] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-[#5A6478] text-sm leading-relaxed max-w-2xl" style="line-height:1.75;">
+            It depends on your rate of return and time horizon. At an <strong>8% annual return over 30 years</strong>, investing around $670/month reaches $1 million. Over 40 years, just $286/month does the same — showing how powerful starting early is. Use the calculator above to model your exact path to any target.
+          </p>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center pb-8" role="contentinfo">
+      <p class="text-[11px] text-[#A0AABF]">
+        For educational purposes only. Assumes constant interest rates and regular contributions. Not financial advice.
+      </p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  /* ── State ── */
+  let n = 4; // compounding frequency
+
+  /* ── Helpers ── */
+  const $ = id => document.getElementById(id);
+  const fmt = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function fmtShort(v) {
+    if (v >= 1e9) return '$' + (v/1e9).toFixed(2) + 'B';
+    if (v >= 1e6) return '$' + (v/1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return '$' + (v/1e3).toFixed(1) + 'K';
+    return '$' + Math.round(v);
+  }
+
+  function setAnim(id, val) {
+    const el = $(id);
+    el.classList.add('flash');
+    setTimeout(() => { el.textContent = val; el.classList.remove('flash'); }, 160);
+  }
+
+  /* ── Slider ↔ input sync ── */
+  function wire(inputId, sliderId) {
+    const inp = $(inputId), sld = $(sliderId);
+    function update(src, dst) {
+      dst.value = src.value;
+      updateSliderFill(sld);
+      calculate();
+    }
+    inp.addEventListener('input', () => update(inp, sld));
+    sld.addEventListener('input', () => update(sld, inp));
+    updateSliderFill(sld);
+  }
+
+  function updateSliderFill(sld) {
+    const pct = ((sld.value - sld.min) / (sld.max - sld.min) * 100).toFixed(1) + '%';
+    sld.style.setProperty('--pct', pct);
+  }
+
+  wire('principal', 'principalSlider');
+  wire('monthly',   'monthlySlider');
+  wire('rate',      'rateSlider');
+  wire('years',     'yearsSlider');
+
+  /* ── Frequency pills ── */
+  $('freqGroup').addEventListener('click', e => {
+    const btn = e.target.closest('.freq-pill');
+    if (!btn) return;
+    document.querySelectorAll('.freq-pill').forEach(b => { b.classList.remove('on'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('on');
+    btn.setAttribute('aria-pressed','true');
+    n = parseInt(btn.dataset.n);
+    calculate();
+  });
+
+  /* ── Core calculation ── */
+  function calculate() {
+    const P  = Math.max(0, parseFloat($('principal').value) || 0);
+    const M  = Math.max(0, parseFloat($('monthly').value)   || 0);
+    const r  = Math.max(0, parseFloat($('rate').value)      || 0) / 100;
+    const T  = Math.max(1, parseInt($('years').value)       || 1);
+
+    const rows = [];
+    let balance = P;
+    const monthsPerPeriod = 12 / n;
+
+    for (let yr = 1; yr <= T; yr++) {
+      for (let p = 0; p < n; p++) {
+        balance *= (1 + r / n);
+        balance += M * monthsPerPeriod;
+      }
+      const invested = P + M * 12 * yr;
+      rows.push({ yr, balance, invested, interest: Math.max(0, balance - invested) });
+    }
+
+    const final    = rows[T - 1].balance;
+    const invested = P + M * 12 * T;
+    const interest = Math.max(0, final - invested);
+    const intPct   = final > 0 ? (interest / final * 100) : 0;
+    const multiple = P > 0 ? (final / P).toFixed(1) : '—';
+
+    /* Results */
+    setAnim('totalAmt',      fmt(final));
+    setAnim('totalContrib',  fmtShort(invested));
+    setAnim('totalInterest', fmtShort(interest));
+    $('intPct').textContent  = Math.round(intPct) + '% interest';
+    $('barP').style.width = (100 - intPct).toFixed(1) + '%';
+    $('barI').style.width = intPct.toFixed(1) + '%';
+
+    /* Insight */
+    let ins = '';
+    if (P > 0 || M > 0) {
+      const earn = interest >= 1000
+        ? `earning <strong style="color:#1B5E45">${fmtShort(interest)}</strong> in pure interest`
+        : `earning interest on your contributions`;
+      ins = `Your money grows <strong style="color:#1B5E45">${multiple}×</strong> over ${T} year${T!==1?'s':''}, ${earn}.`;
+    }
+    $('insight').innerHTML = ins || 'Adjust the inputs to see your projection.';
+
+    /* Year label */
+    $('yrsLabel').textContent = T + ' year' + (T !== 1 ? 's' : '');
+
+    /* Table */
+    buildTable(rows);
+
+    /* Chart */
+    drawChart(rows);
+  }
+
+  /* ── Breakdown table ── */
+  function buildTable(rows) {
+    const tbody = $('breakdown-body');
+    tbody.innerHTML = '';
+    rows.forEach((row, i) => {
+      const prev = i === 0 ? (parseFloat($('principal').value)||0) : rows[i-1].balance;
+      const gPct = prev > 0 ? ((row.balance - prev) / prev * 100).toFixed(1) : '0.0';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="py-3 pr-4 text-[#1C2333] font-semibold">${row.yr}</td>
+        <td class="py-3 pr-4 text-right text-[#1C2333] font-medium">${fmt(row.balance)}</td>
+        <td class="py-3 pr-4 text-right text-[#5A6478]">${fmt(row.invested)}</td>
+        <td class="py-3 pr-4 text-right font-medium" style="color:#C9922F">${fmt(row.interest)}</td>
+        <td class="py-3 text-right">
+          <span class="inline-block text-[#1B5E45] font-semibold text-[11px] bg-[#F0F7F3] border border-[#D8EDE3] px-2 py-0.5 rounded-full">+${gPct}%</span>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  /* ── Chart ── */
+  function drawChart(rows) {
+    const canvas = $('chart');
+    const ctx    = canvas.getContext('2d');
+    const dpr    = window.devicePixelRatio || 1;
+    const W      = canvas.offsetWidth || 460;
+    const H      = 200;
+
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, W, H);
+
+    if (!rows.length) return;
+
+    const pad  = { t: 12, r: 18, b: 36, l: 58 };
+    const cW   = W - pad.l - pad.r;
+    const cH   = H - pad.t - pad.b;
+    const maxV = Math.max(...rows.map(r => r.balance)) * 1.04;
+    const len  = rows.length;
+
+    const xOf = i => pad.l + (i / Math.max(len - 1, 1)) * cW;
+    const yOf = v => pad.t + cH - (v / maxV) * cH;
+
+    /* Grid */
+    ctx.setLineDash([3, 5]);
+    ctx.lineWidth = 1;
+    for (let g = 0; g <= 4; g++) {
+      const v = (g / 4) * maxV;
+      const y = yOf(v);
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(200,195,188,.6)';
+      ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + cW, y);
+      ctx.stroke();
+      ctx.fillStyle = '#A0AABF';
+      ctx.font = `11px 'DM Sans', sans-serif`;
+      ctx.textAlign = 'right';
+      ctx.fillText(fmtShort(v), pad.l - 8, y + 4);
+    }
+    ctx.setLineDash([]);
+
+    /* X labels */
+    const step = len <= 12 ? 1 : Math.ceil(len / 10);
+    ctx.fillStyle = '#A0AABF';
+    ctx.textAlign = 'center';
+    rows.forEach((r, i) => {
+      if (i % step === 0 || i === len - 1) {
+        ctx.fillText('Y' + r.yr, xOf(i), H - 10);
+      }
+    });
+
+    /* Invested area */
+    ctx.beginPath();
+    rows.forEach((r, i) => {
+      const x = xOf(i), y = yOf(r.invested);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.lineTo(xOf(len - 1), yOf(0));
+    ctx.lineTo(xOf(0), yOf(0));
+    ctx.closePath();
+    const gInv = ctx.createLinearGradient(0, pad.t, 0, pad.t + cH);
+    gInv.addColorStop(0, 'rgba(27,94,69,.45)');
+    gInv.addColorStop(1, 'rgba(27,94,69,.05)');
+    ctx.fillStyle = gInv;
+    ctx.fill();
+
+    /* Interest area (between invested and balance) */
+    ctx.beginPath();
+    rows.forEach((r, i) => {
+      const x = xOf(i), y = yOf(r.balance);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    for (let i = len - 1; i >= 0; i--) {
+      ctx.lineTo(xOf(i), yOf(rows[i].invested));
+    }
+    ctx.closePath();
+    const gInt = ctx.createLinearGradient(0, pad.t, 0, pad.t + cH);
+    gInt.addColorStop(0, 'rgba(255,209,102,.65)');
+    gInt.addColorStop(1, 'rgba(255,209,102,.1)');
+    ctx.fillStyle = gInt;
+    ctx.fill();
+
+    /* Lines */
+    function drawLine(pts, color, width = 2.5) {
+      ctx.beginPath();
+      pts.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+      ctx.strokeStyle = color;
+      ctx.lineWidth   = width;
+      ctx.lineJoin    = 'round';
+      ctx.stroke();
+    }
+
+    drawLine(rows.map((r, i) => [xOf(i), yOf(r.invested)]), '#1B5E45');
+    drawLine(rows.map((r, i) => [xOf(i), yOf(r.balance)]),  '#FFD166');
+
+    /* End-point dots */
+    function dot(x, y, fill) {
+      ctx.beginPath();
+      ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle   = fill;
+      ctx.fill();
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth   = 2;
+      ctx.stroke();
+    }
+    dot(xOf(len - 1), yOf(rows[len-1].invested), '#1B5E45');
+    dot(xOf(len - 1), yOf(rows[len-1].balance),  '#FFD166');
+  }
+
+  /* ── Init ── */
+  calculate();
+
+  let rAF;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(calculate);
+  });
+</script>
+</body>
+</html>

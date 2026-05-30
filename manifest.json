@@ -1,0 +1,29 @@
+{
+  "name": "Compound Interest Calculator",
+  "short_name": "CI Calc",
+  "description": "See how your savings and investments grow over time with compound interest — monthly contributions, multiple compounding frequencies, and a full year-by-year breakdown.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FAF7F2",
+  "theme_color": "#1B5E45",
+  "lang": "en-US",
+  "categories": ["finance", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "label": "Compound Interest Calculator — desktop view"
+    }
+  ]
+}

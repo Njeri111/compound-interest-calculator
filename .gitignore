@@ -1,0 +1,14 @@
+# Local dev server (not needed on GitHub/Vercel)
+serve.ps1
+
+# Claude Code internal files
+.claude/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
